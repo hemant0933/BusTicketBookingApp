@@ -1,6 +1,8 @@
 import { Box, Button, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../components/commonComponents/Navbar";
+import { ColorRing } from "react-loader-spinner";
 
 const BusDetailPage = () => {
   const { busId } = useParams(); // Get the bus ID from the URL
@@ -14,7 +16,9 @@ const BusDetailPage = () => {
     // Fetch bus details by busId from your API
     const fetchBusDetails = async () => {
       try {
-        const response = await fetch(`https://busbackend-muqx.onrender.com/bus/${busId}`);
+        const response = await fetch(
+          `https://busbackend-muqx.onrender.com/bus/${busId}`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -32,8 +36,19 @@ const BusDetailPage = () => {
 
   return (
     <div>
+      <Navbar />
       {loading ? (
-        <p>Loading...</p>
+        <div className="w-full h-screen flex justify-center m-auto items-center">
+          <ColorRing
+            visible={true}
+            height="100"
+            width="100"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+          />
+        </div>
       ) : (
         <div className="relative">
           <Box
@@ -46,17 +61,18 @@ const BusDetailPage = () => {
             alignItems="center"
             flexDirection="column"
           >
-            <h2 className="text-4xl mb-4">Bus Detail Page</h2>
+            <h2 className="text-4xl mt-10 mb-4">Bus Detail Page</h2>
             <Box>
-              {
-                busData.map((item) => (
-                  <div key={item.busId} className="w-[800px] h-auto rounded-md overflow-hidden shadow-md hover:shadow-lg bg-white hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer"
-                  >
-
-                    <div className="p-4">
+              {busData.map((item) => (
+                <div
+                  key={item.busId}
+                  className="w-[800px] h-auto rounded-md overflow-hidden shadow-md hover:shadow-lg bg-white hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer"
+                >
+                  <div className="p-4">
                     <h2 className="text-xl font-semibold">{item.busName}</h2>
                     <p className="text-gray-600 w-full flex justify-between items-center">
-                      <strong>From</strong>{item.source}  <strong>To</strong>
+                      <strong>From</strong>
+                      {item.source} <strong>To</strong>
                       {item.destination}
                     </p>
                     <p>Arrival Time: {item.arrivalTime}</p>
@@ -64,20 +80,19 @@ const BusDetailPage = () => {
                     <p>Price: Starting from Rs. 1200</p>
                     <p>Seats Available: 12</p>
                     <Box className="w-full flex justify-end">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        navigate('/book-ticket')
-                      }}
-                    >
-                      View Seats
-                    </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          navigate("/book-ticket");
+                        }}
+                      >
+                        View Seats
+                      </Button>
                     </Box>
                   </div>
-                  </div>
-                ))
-              }
+                </div>
+              ))}
             </Box>
           </Box>
         </div>

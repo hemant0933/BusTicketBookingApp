@@ -9,7 +9,6 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ColorRing } from "react-loader-spinner";
-import dotenv from "dotenv-webpack";
 // const baseUrl = import.meta.env.BASE_URL;
 
 import { Formik } from "formik";
