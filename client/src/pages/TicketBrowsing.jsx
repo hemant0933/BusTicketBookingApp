@@ -14,7 +14,7 @@ const TicketBrowsing = () => {
 
   const handleSearch = async () => {
     try {
-      let apiUrl = `http://localhost:3000/bus/search_buses?source=${source}&destination=${destination}`;
+      let apiUrl = `https://busbackend-muqx.onrender.com/bus/search_buses?source=${source}&destination=${destination}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {

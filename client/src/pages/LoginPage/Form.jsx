@@ -9,6 +9,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ColorRing } from "react-loader-spinner";
+import dotenv from "dotenv-webpack";
+// const baseUrl = import.meta.env.BASE_URL;
 
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -67,7 +69,7 @@ const Form = () => {
       };
 
       const savedUserResponse = await fetch(
-        "http://localhost:3000/auth/register",
+        `https://busbackend-muqx.onrender.com/auth/register`,
         {
           method: "POST",
           headers: {
@@ -91,7 +93,7 @@ const Form = () => {
   const login = async (values, onSubmitProps) => {
     //
     try {
-      const loggedInResponse = await fetch("http://localhost:3000/auth/login", {
+      const loggedInResponse = await fetch("https://busbackend-muqx.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

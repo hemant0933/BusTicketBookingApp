@@ -14,7 +14,7 @@ const BusDetailPage = () => {
     // Fetch bus details by busId from your API
     const fetchBusDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/bus/${busId}`);
+        const response = await fetch(`https://busbackend-muqx.onrender.com/bus/${busId}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
